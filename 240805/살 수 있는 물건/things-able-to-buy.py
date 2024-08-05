@@ -5,4 +5,4 @@ if a >= 3000 :
 elif a >= 100 :
     print("mask")
 else :
-    print("No")
+    print("no")
