@@ -6,6 +6,6 @@ for i in range(n):
     print()
 
 for i in range(n - 1):
-    for j in range(0, 4 - i):
+    for j in range(0, n - 1 - i):
         print("*", end=" ")
     print()
