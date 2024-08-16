@@ -7,7 +7,7 @@ for i in range(n):
             print(1 + n*i + j, end=" ")
     else:
         for j in range(n):
-            print(n*(1 + 1) - j, end=" ")
+            print(n*(i + 1) - j, end=" ")
     print()
 
 #짝수 행 : 1 + n*i 시작값    + 1 씩 반복
