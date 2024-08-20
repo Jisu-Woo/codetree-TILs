@@ -1,6 +1,7 @@
 n = int(input())
 
-arr = list(map(int, input().split()))
+arr = input().split()
+
 check_arr = []
 for elem in arr:
     if elem in check_arr:
