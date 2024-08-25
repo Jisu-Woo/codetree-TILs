@@ -12,6 +12,5 @@ for i in range(len(str)):
         dir = (dir + 1) % 4
     else:
         x, y = x + dx[dir], y + dy[dir]
-        break
-
+        
 print(x, y)
