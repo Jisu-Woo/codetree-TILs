@@ -1,13 +1,19 @@
 arr = list(input())
 
-open_sum = 0
-close_sum = 0
-is_open = False
+open_pos = [] # 열리는 쌍의 위치를 저장
+close_pos = [] # 닫히는 쌍의 위치를 저장
+cnt = 0
 for i in range(len(arr) - 1):
     if arr[i] == "(" and arr[i+1] == "(":
-        open_sum += 1
-        is_open = True
-    if is_open and arr[i] == ")" and arr[i+1] == ")":
-        close_sum += 1
+        open_pos.append(i)
 
-print(open_sum * close_sum)
+for i in range(len(arr) - 1):
+    if arr[i] == ")" and arr[i+1] == ")":
+        close_pos.append(i)
+
+for i in open_pos:
+    for j in close_pos:
+        if i < j:
+            cnt += 1
+
+print(cnt)
