@@ -11,7 +11,7 @@ for i in range(q):
         idx = 0
         idx = arr.index(query[1]) + 1
         print(idx)
-    else:
+    elif query[0] == 3:
         string = ''
         for elem in arr[query[1] - 1:query[2]]:
             string += str(elem) + ' '
