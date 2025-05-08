@@ -61,7 +61,7 @@ def shooting(head, dependers):
     h_x, h_y = head
     food = F[h_x][h_y]
     
-    dependers.add((h_x, h_y))
+    #dependers.add((h_x, h_y))
     d = B[h_x][h_y] % 4
     # 간절함 x   
     x = B[h_x][h_y] - 1
