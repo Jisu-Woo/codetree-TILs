@@ -45,17 +45,10 @@ def get_head(group):
     return head_x, head_y
 
 def food_sum(food1, food2):
-    f1 = list(food1)
-    f2 = list(food2)
+    f_set = set(food1)
+    f_set.update(set(food2))
 
-    f1_set = set(f1)
-    f2_set = set(f2)
-
-    f1_set.update(f2_set)
-    f1_list = list(f1_set)
-    f1_list.sort() # 항상 같은 순서로 반환하도록
-
-    return ''.join(f1_list)
+    return ''.join(sorted(f_set)) # 항상 같은 순서를 유지하도록 정렬해서 리턴
 
 def shooting(head, dependers):
     h_x, h_y = head
