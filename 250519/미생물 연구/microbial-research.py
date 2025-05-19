@@ -118,8 +118,8 @@ for j in range(1, len(pos)):
         for y in range(c1, c2):
             maps[x][y] = j  # 미생물 무리의 인덱스로 표시
 
-    # print('투입 완료 삭제 전')
-    # for z in range(0, n):
+    #print("투입 완료 삭제 전")
+    #for z in range(0, n):
     #    print(maps[z])
     # 무리 하나 투입할 때마다 다른 무리가 둘 이상으로 나눠졌다면 나눠진 무리는 모두 삭제
     # 확인 방법: 현재 투입된 무리보다 먼저 투입된 모든 무리들의 (r1, c1) 부터 (r2, c2) 까지 훑으면서 특정 좌표에서 해당 인덱스를 발견 시
@@ -145,8 +145,8 @@ for j in range(1, len(pos)):
                         bfs(x, y, visited, idx)
                         already_found = True
 
-    # print("이동 전")
-    # for z in range(0, n):
+    #print("이동 전")
+    #for z in range(0, n):
     #    print(maps[z])
     # 배양 용기 이동
     # 순서: 가장 넓은 무리(중에서도 먼저 투입된 무리) 순
@@ -188,38 +188,39 @@ for j in range(1, len(pos)):
         for x in range(0, n):
             for y in range(0, n):
                 # print("탐색 ", x, y)
-                if new_maps[x][y] == 0:  # 빈 공간을 찾았다면
-                    # print("여기부터 시작: ", x, y)
-                    # 현재 미생물이 들어갈 수 있는 공간이 되는지 체크
-                    is_possible = True
+                # if new_maps[x][y] == 0:  # 빈 공간을 찾았다면
+                # print("여기부터 시작: ", x, y)
+                # 현재 미생물이 들어갈 수 있는 공간이 되는지 체크
+                is_possible = True
 
+                for coord in coord_list:
+                    a = coord[0]
+                    b = coord[1]
+
+                    nx = x + a - min_x
+                    ny = y + b - min_y
+                    if 0 > nx or nx >= n or 0 > ny or ny >= n:
+                        is_possible = False
+                        break
+                    elif new_maps[nx][ny] != 0:
+                        is_possible = False
+                        break
+
+                # 해당 x, y 좌표에 미생물 들어갈 자리가 된다면 옮기기
+                if is_possible:
                     for coord in coord_list:
                         a = coord[0]
                         b = coord[1]
-                        nx = x + a - min_x
-                        ny = y + b - min_y
-                        if 0 > nx or nx >= n or 0 > ny or ny >= n:
-                            is_possible = False
-                            break
-                        elif new_maps[nx][ny] != 0:
-                            is_possible = False
-                            break
 
-                    # 해당 x, y 좌표에 미생물 들어갈 자리가 된다면 옮기기
-                    if is_possible:
-                        for coord in coord_list:
-                            a = coord[0]
-                            b = coord[1]
+                        new_maps[x + a - min_x][y + b - min_y] = idx
 
-                            new_maps[x + a - min_x][y + b - min_y] = idx
-
-                        is_done = True
-                        break
+                    is_done = True
+                    break
             if is_done:
                 break
 
-    # print("새 용기 이동 후")
-    # for z in range(0, n):
+    #print("새 용기 이동 후")
+    #for z in range(0, n):
     #    print(new_maps[z])
 
     # 실험 결과 기록
@@ -244,5 +245,6 @@ for j in range(1, len(pos)):
         total += a_size * b_size
 
     print(total)
+    #print()
 
     maps = copy.deepcopy(new_maps)
