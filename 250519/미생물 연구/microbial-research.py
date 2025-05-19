@@ -1,5 +1,4 @@
 from collections import deque
-import copy
 
 n, q = map(int, input().split())
 
@@ -108,7 +107,6 @@ def get_size(idx, sizes):
 
 
 # 총 q번의 실험 진행
-# for i in range(q):
 
 # 1) 미생물 투입
 for j in range(1, len(pos)):
@@ -126,7 +124,6 @@ for j in range(1, len(pos)):
     # 그 좌표로 bfs 진행 -> 방문처리하기
     # 다시 나머지 좌표 훑으면서 방문하지 않은 좌표 중에서 해당 인덱스를 또 발견한다면 둘 이상으로 쪼개진 것 -> 모두 삭제
     for idx in range(1, j):
-        # r1_, c1_, r2_, c2_ = pos[idx]
 
         visited = []
         already_found = False
@@ -136,7 +133,7 @@ for j in range(1, len(pos)):
                 if maps[x][y] == idx and [x, y] not in visited:  # 현재 무리 인덱스 발견
                     if already_found:
                         # 모두 삭제
-                        # (r1, c1) ~ (r2, c2)를 돌면서 해당 인덱스 0으로 초기화
+                        # 맵 전체를 돌면서 해당 인덱스 0으로 초기화
                         for a in range(0, n):
                             for b in range(0, n):
                                 if maps[a][b] == idx:
@@ -176,9 +173,9 @@ for j in range(1, len(pos)):
         coord_list = coords.get(idx)
 
         coord_list.sort(key=lambda x: x[0])
-        min_x = coord_list[0][0]
+        min_x = coord_list[0][0] # 좌표들의 최소 x 저장
         coord_list.sort(key=lambda x: x[1])
-        min_y = coord_list[0][1]
+        min_y = coord_list[0][1] # 좌표들의 최소 y 저장
 
         # print(idx, min_x, min_y)
         # print(idx, "의 ", coord_list)
@@ -188,7 +185,7 @@ for j in range(1, len(pos)):
         for x in range(0, n):
             for y in range(0, n):
                 # print("탐색 ", x, y)
-                # if new_maps[x][y] == 0:  # 빈 공간을 찾았다면
+                # if new_maps[x][y] == 0:  # 빈 공간을 찾았다면 -> 직사각형이 아닌 경우를 위해서 0이 아닌 공간도 모두 탐색하도록 수정
                 # print("여기부터 시작: ", x, y)
                 # 현재 미생물이 들어갈 수 있는 공간이 되는지 체크
                 is_possible = True
@@ -216,7 +213,7 @@ for j in range(1, len(pos)):
 
                     is_done = True
                     break
-            if is_done:
+            if is_done: # 이미 옮겼다면 더 이상 볼 필요 없으므로 
                 break
 
     #print("새 용기 이동 후")
@@ -247,4 +244,6 @@ for j in range(1, len(pos)):
     print(total)
     #print()
 
-    maps = copy.deepcopy(new_maps)
+    # 기존 맵에 새 맵 깊은 복사 시키기
+    maps = list(map(list, new_maps))
+    #maps = copy.deepcopy(new_maps)
